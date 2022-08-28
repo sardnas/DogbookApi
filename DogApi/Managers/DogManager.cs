@@ -10,6 +10,7 @@ namespace DogApi.Managers
         private List<string> exercises = new List<string>();
         private List<string> groomings = new List<string>();
         private List<string> names = new List<string>();
+        private List<string> images = new List<string>();
 
         private Random random = new Random();
         public DogManager() // konstruktor
@@ -44,6 +45,8 @@ namespace DogApi.Managers
             names.Add("Rickard");
             names.Add("Josefine");
             names.Add("Leonardo Da Vinci");
+
+            images.Add("bild 1");
         }
 
         public DogBreed GetBreed()
@@ -54,7 +57,8 @@ namespace DogApi.Managers
                 Grooming = groomings.GetRandom(random),
                 Name = breeds.GetRandom(random),
                 Temperament = personalities.GetRandom(random),
-                Size = Size.CreateRandom(random)
+                Size = Size.CreateRandom(random),
+                Image = images.GetRandom(random)
             };
         }
 

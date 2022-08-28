@@ -1,0 +1,12 @@
+﻿create table "Breed" ("Id" BIGSERIAL PRIMARY KEY NOT NULL, 
+"Name" VARCHAR(100) UNIQUE NOT NULL,
+"Temperament" VARCHAR(500),
+"MinHeight" double precision,
+"MaxHeight" double precision,
+"MinWeight" double precision,
+"MaxWeight" double precision,
+"Exercise" VARCHAR(500),
+"Grooming" VARCHAR(500),
+"Group" BIGINT REFERENCES "Group" ("Id"),
+"Image" VARCHAR(500)
+)
