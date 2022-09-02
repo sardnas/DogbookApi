@@ -32,7 +32,7 @@ namespace DogApi.Managers
                                 Grooming = (string)reader["Grooming"],
                                 Name = (string)reader["Name"],
                                 Temperament = (string)reader["Temperament"],
-                                Size = Size.CreateRandom(random), // TODO
+                                Size = Size.Create((int)reader["MinHeight"], (int)reader["MaxHeight"], (int)reader["MinWeight"], (int)reader["MaxWeight"]), // TODO
                                 Image = (string)reader["Image"]
                             };
                         }

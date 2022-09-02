@@ -5,12 +5,12 @@
         public int Height { get; set; }
         public int Weight { get; set; }
 
-        public static Size CreateRandom(Random random)
+        public static Size Create(int minHeight, int maxHeight, int minWeight, int maxWeight)
         {
             return new Size()
             {
-                Height = random.Next(103)+10,
-                Weight = random.Next(50)+1      
+                Height = minHeight,
+                Weight = minWeight    
             };
         }
     }

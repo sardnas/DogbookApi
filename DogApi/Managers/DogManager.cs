@@ -57,7 +57,7 @@ namespace DogApi.Managers
                 Grooming = groomings.GetRandom(random),
                 Name = breeds.GetRandom(random),
                 Temperament = personalities.GetRandom(random),
-                Size = Size.CreateRandom(random),
+                Size = Size.Create(1, 2, 3, 4),
                 Image = images.GetRandom(random)
             };
         }
