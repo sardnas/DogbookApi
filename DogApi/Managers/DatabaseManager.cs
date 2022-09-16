@@ -39,6 +39,8 @@ namespace DogApi.Managers
                     }
                 }
             }
+
+            return null;
         }
     }
 }
