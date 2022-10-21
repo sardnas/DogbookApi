@@ -1,0 +1,9 @@
+﻿CREATE TABLE site_user (
+id SERIAL PRIMARY KEY,
+name VARCHAR(100) UNIQUE NOT NULL,
+email VARCHAR(255) UNIQUE NOT NULL,
+password VARCHAR(500),
+breed_id BIGINT REFERENCES breed (id),
+created_date DATE DEFAULT NOW(),
+role INT
+)

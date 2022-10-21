@@ -45,7 +45,7 @@ namespace DogApi.Controllers
             try
             {
                 DatabaseManager database = new DatabaseManager();
-                User user = await database.GetUserByEmailAsync(userLoginInformation.Email);
+                User user = await database.GetUserByUsername(userLoginInformation.Username);
 
                 if (user == null)
                     return new ApiResponse("Invalid username and/or password", HttpStatusCode.Unauthorized);

@@ -8,12 +8,12 @@ namespace DogApi.RequestBodies
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public string Breed { get; set; }
-        public override bool Valid { get { return !string.IsNullOrEmpty(UserName) || !string.IsNullOrEmpty(Password) || !string.IsNullOrEmpty(Email) || !string.IsNullOrEmpty(Breed); } }
+        public int Breed { get; set; }
+        public override bool Valid { get { return !string.IsNullOrEmpty(UserName) || !string.IsNullOrEmpty(Password) || !string.IsNullOrEmpty(Email); } }
 
         public User GetUser() 
         {
-            return new User(UserName, Email, Password, DateTime.Now);
+            return new User(UserName, Email, Password, Breed, DateTime.Now);
         }
     }
 }
