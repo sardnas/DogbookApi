@@ -9,10 +9,38 @@ namespace DogApi.Managers
     public class DatabaseManager
     {
         private string connectionString;
+
         public DatabaseManager()
         {
             string connectionUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
             connectionString = ConnectionStringHelper.GetConnectionStringFromUrl(connectionUrl);
+        }
+
+        public async Task<List<DogBreed>> GetBreedsAsync()
+        {
+            List<DogBreed> listOfBreeds = new List<DogBreed>();
+            string query = @"SELECT name, id FROM breed";
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            {
+                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                {
+                    await connection.OpenAsync();
+
+                    using (NpgsqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            listOfBreeds.Add( new DogBreed()
+                            {
+                                Name = (string)reader["name"],
+                                Id = (int)(long)reader["id"],
+                            });
+                        }
+                    }
+                }
+            }
+
+            return listOfBreeds;
         }
 
         public async Task<DogBreed> GetBreedByIdAsync(long id) // Om man inte vill att UI ska frysa medan funktionen väntar på ett anrop
