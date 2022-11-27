@@ -1,0 +1,5 @@
+﻿create table "post" ("id" BIGSERIAL PRIMARY KEY NOT NULL, 
+"user" BIGINT UNIQUE NOT NULL REFERENCES site_user(id),
+"date" TIMESTAMP NOT NULL DEFAULT NOW(),
+"text" VARCHAR(255) NOT NULL
+)

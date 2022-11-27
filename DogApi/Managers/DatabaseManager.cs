@@ -129,5 +129,23 @@ namespace DogApi.Managers
 
             return result;
         }
+
+        public async Task<int> CreatePost(string text, User user)
+        {
+            Post result = null;
+            const string query = @"INSERT INTO post (user, text)
+                                    VALUES (@user, @text)
+                                    RETURNING id";
+            using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+            using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+            {
+                await connection.OpenAsync();
+
+                command.Parameters.Add("@user", NpgsqlDbType.Varchar).Value = user.Id;
+                command.Parameters.Add("@text", NpgsqlDbType.Varchar).Value = text;
+
+                return (int)await command.ExecuteScalarAsync();
+            }
+        }
     }
 }
