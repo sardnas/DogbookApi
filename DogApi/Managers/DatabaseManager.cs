@@ -130,7 +130,7 @@ namespace DogApi.Managers
             return result;
         }
 
-        public async Task<int> CreatePost(string text, User user)
+        public async Task<int> CreatePost(string text, int userId)
         {
             Post result = null;
             const string query = @"INSERT INTO post (user, text)
@@ -141,7 +141,7 @@ namespace DogApi.Managers
             {
                 await connection.OpenAsync();
 
-                command.Parameters.Add("@user", NpgsqlDbType.Varchar).Value = user.Id;
+                command.Parameters.Add("@user", NpgsqlDbType.Integer).Value = userId;
                 command.Parameters.Add("@text", NpgsqlDbType.Varchar).Value = text;
 
                 return (int)await command.ExecuteScalarAsync();

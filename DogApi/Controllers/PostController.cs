@@ -1,4 +1,6 @@
-﻿using DogApi.Managers;
+﻿using DogApi.Helpers;
+using DogApi.Helpers.ExtensionMethods;
+using DogApi.Managers;
 using DogApi.Models;
 using DogApi.RequestBodies;
 using Microsoft.AspNetCore.Authorization;
@@ -8,7 +10,6 @@ using System.Net;
 
 namespace DogApi.Controllers
 {
-
     [ApiController]
     [Route("api")]
     public class PostController : ControllerBase
@@ -24,8 +25,9 @@ namespace DogApi.Controllers
                 if (!requestBody.Valid)
                     return new ApiResponse(requestBody.GetInvalidBodyMessage(), HttpStatusCode.BadRequest);
 
-                //user = await database.AddUser(user);
-                //return new ApiResponse(user);
+                int postId = await database.CreatePost(requestBody.Message, UserHelper.GetClaims(User).GetUserId());
+                
+                return new ApiResponse(postId);
             }
             catch (ApiException apiException)
             {
